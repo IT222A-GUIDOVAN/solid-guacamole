@@ -12,4 +12,4 @@ Create a function code
 8. A function that gets two numbers from the user (dividend and divisor), ensures the divisor is not zero, and displays their quotient:
 9. A function reads an employee name (NAME). Overtime hours worked (OVERTIME), hours absent (ABSENT) and
 Determine the bonus payment (PAYMENT) to calculate the bonus
-10 A function that calculates the Fibonacci sequence up to a given limit n.
+10. A function that calculates the Fibonacci sequence up to a given limit n.
