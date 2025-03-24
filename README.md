@@ -15,3 +15,7 @@ only the student on specific section can access this
 Note:
 Be mindful on repositories and branch you are using.
 All you commiting or doing here is recorded on history.
+
+# MIDTERM
+* Activity 10 problem php function
+https://github.com/IT222A-GUIDOVAN/solid-guacamole/blob/main/Activity%20Function.txt
