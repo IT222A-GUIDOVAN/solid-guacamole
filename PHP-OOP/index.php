@@ -7,11 +7,19 @@
 </head>
 <body>
     <?php include 'Class.php';
+    include 'FileClass.php';
     
-    echo $account->accountNumber;
+    echo $account->getacc();
     echo "<br>";
-    echo $account->balance;
+    echo $account->getbalance();
+    
+    ?>
+    <hr>
 
+    <?php
+    echo $customer->getName();
+    echo "<br>";
+    echo $customer->getAge();
     ?>
     
 </body>
