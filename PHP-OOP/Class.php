@@ -13,7 +13,7 @@ class Account{
 }
 
 class BankAccount{
-
+    
     public $balance;
 
     public function __construct($balance){
@@ -30,7 +30,9 @@ class BankAccount{
 
         if($amount > 0){
             $this->balance += $amount; 
+            return true;
         }
+        return false;
     }
 
     public function withdraw($amount){
@@ -38,8 +40,7 @@ class BankAccount{
             $this->balance -= $amount;
             return true;
         }
-          return false;
-
+        return false;
     }
 
     // public function transaction($action, $amount){
@@ -59,7 +60,7 @@ Class Customer{
     private $name;
     private $age;
     private $id;
-    private $accounts;
+    private $accounts = [];
 
     public function __construct($name,$id,$age){
         $this->name = $name;
@@ -69,12 +70,12 @@ Class Customer{
     }
 
     public function openAccount($account, $bankAccount){
-        $this->accounts = ['account' => $account, 'bankAccount' => $bankAccount];
+        $this->accounts[] = ['account' => $account, 'bankAccount' => $bankAccount];
     }
 
-    public function closeAccount($account){
-        foreach($this->accounts as $index => $acct){
-            if($account['account']->getAccounts() == $account->getAccounts()){
+    public function closeAccount($accountToClose){
+        foreach($this->accounts as $index => $accountData){
+            if($accountData['account']->getAccountNumber() == $accountToClose->getAccountNumber()){
                 unset($this->accounts[$index]);
                 return true;
             }
@@ -82,8 +83,8 @@ Class Customer{
         return false;
     }
 
-    public function getAccounts(){
-        return $this->accounts;
+    public function getAccounts() {
+        return $this->accounts ?? [];
     }
     public function getName(){
         return $this->name;
@@ -126,13 +127,12 @@ class Bank{
         return in_array($customer, $this->customers);
     }
 
-    public function processTransaction($account,$amount){
-        $bankaccount = $account['bankAccount'];
+    public function processTransaction($account, $amount){
         if($amount > 0){
-            return $bankaccount->deposit($amount);
-        }else {
-            return $bankaccount->withdraw(abs($amount));
-        }
+            $account->deposit($amount);
+        }else{
+            $account->withdraw(abs($amount));
+        }   
     }
 
     public function addCustomer($customer){

@@ -30,82 +30,49 @@
 
     //vertify customers
     echo $bank->verifyCustomer($customer1) ;
-    echo PHP_EOL;
+    echo "<br>";
 
+    //display customer details
+    foreach($bank->getCustomers() as $customer){
+        echo 
+        "Customer Name: " . $customer->getName() . "<br>" .
+        "Customer ID: " . $customer->getId() . "<br>" .
+        "Customer Age: " . $customer->getAge() . "<br>";
+
+        foreach ($customer->getAccounts() as $account) {
+            echo "Account ID: " . $account['account']->getAccountNumber() . "<br>";
+        }
+        echo "<br>";
+    }
     //prosessing transaction
 
-    $bank->processTransaction($customer1->getAccounts()[0], -200);
-    $bank->processTransaction($customer2->getAccounts()[0], 300);
+    $bank->processTransaction($customer1->getAccounts()[0]['bankAccount'], -200);//withdrawal
+    $bank->processTransaction($customer1->getAccounts()[0]['bankAccount'], 300); //deposit
+
+    $bank->processTransaction($customer2->getAccounts()[0]['bankAccount'], 300); //deposit
 
     $saveAccount->addInterest();
 
     //display account balance
+
+    echo "<br>";
     foreach($customer1->getAccounts() as $account){
-        echo "Account Number:" . $account['account']->getAccounts(). "<br>".
-        "Balances; PHP".$account['bankAccount']->getBalance(). "<br>";
+            echo "Account Number: " . $account['account']->getAccountNumber() . "<br>" .
+            "Balance: PHP " . $account['bankAccount']->getBalance() . "<br>";
     }
 
+    echo "<br>";
     foreach($customer2->getAccounts() as $account){
-        echo "Account Number:" . $account['account']->getAccounts(). "<br>".
-        "Balances; PHP".$account['bankAccount']->getBalance(). "<br>";
+            echo "Account Number: " . $account['account']->getAccountNumber() . "<br>" .
+            "Balance: PHP " . $account['bankAccount']->getBalance() . "<br>";
     }
-
-    // $account = new BankAccount(100);
-
-    // $account->deposit(100);
-
-    // $account->withdraw(-500);
-
-    // $account->transaction("deposit", 100);
-    // $account->transaction("withdraw", 200);
-
-    
-    // $saveaccount->deposit(100);
-    // $saveaccount->withdraw(50);
-
-    // $saveaccount->setInterestRate(0.05);
-    // $saveaccount->addInterest();
-
-    // // include 'FileClass.php';
-    
-    // echo "<br>";
-    // echo $account->getbalance();
-    
-    // ?>
-    // <hr>
-    // <?php
-    // echo "<br>";
-    // echo $saveaccount->getbalance();
-    // echo "<br>";
-    // echo $saveaccount->getInterestRate();
-    // ?>
-    // <hr>
-
-    // <?php
-    // echo $customer->getName();
-    // echo "<br>";
-    // echo $customer->getAge();
-    // ?>
-    // <hr>
-
-    // <?php
-    
-
-    // echo "Balance:". $checkingAccount->getbalance(). "<br>";
-
-    // if($checkingAccount->withdraw(300)){
-    //     echo "Withdraw success" . "<br>". "Balance:". $checkingAccount->getbalance(). "<br>";
-    // }else {
-    //     echo "Withdraw failed";
-    // }
-
-    // if($checkingAccount->withdraw(850)){
-    //     echo "Withdraw success" . "<br>". "Balance:". $checkingAccount->getbalance(). "<br>";
-    // }else {
-    //     echo "Withdraw failed";
-    // }
-    // ?>
-
+?>
+    <br>
+    <?php
+    //close account
+    echo "Closing Account: " . $account1->getAccountNumber() . "<br>";
+    $customer1->closeAccount($account1);
+    ?>
     
 </body>
 </html>
